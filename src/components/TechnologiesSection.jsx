@@ -101,14 +101,14 @@ export default function TechnologiesSection({ onOpenContact, activeCategory = "a
                       
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3.5">
-                          <div className="w-12 h-12 rounded-xl bg-[#040814] border border-slate-700/80 flex items-center justify-center p-2.5 group-hover:scale-105 transition-transform shadow-inner">
+                          <div className="w-12 h-12 rounded-xl bg-[#040814] border border-slate-700/80 flex items-center justify-center p-2.5 group-hover:scale-105 transition-transform shadow-inner shrink-0">
                             <TechIcon name={tech.name} className="w-7 h-7" />
                           </div>
                           <div>
                             <h4 className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors">
                               {tech.name}
                             </h4>
-                            <span className="text-[10px] font-semibold text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/60">
+                            <span className="text-[10px] font-semibold text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/60 inline-block mt-0.5">
                               {tech.level}
                             </span>
                           </div>
@@ -120,18 +120,6 @@ export default function TechnologiesSection({ onOpenContact, activeCategory = "a
                       </p>
 
                     </div>
-
-                    <div className="pt-4 mt-4 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400">
-                      <span className="flex items-center gap-1.5 text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>Enterprise Certified</span>
-                      </span>
-                      <span className="text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                        <span>Architecture Spec</span>
-                        <ArrowRight className="w-3 h-3" />
-                      </span>
-                    </div>
-
                   </div>
                 ))}
               </div>
