@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-950: #040814;
-  --color-navy-900: #0B132B;
-  --color-navy-800: #1C2541;
-  --color-navy-700: #2A365C;
-  --color-navy-600: #3D4C7C;
+  --color-navy-950: #021716;
+  --color-navy-900: #032221;
+  --color-navy-800: #115e59;
+  --color-navy-700: #0f766e;
+  --color-navy-600: #14b8a6;
   --color-cyan-300: #7DD3FC;
   --color-cyan-400: #38BDF8;
   --color-cyan-500: #00B4D8;
@@ -13,8 +13,20 @@
 }
 
 @layer base {
+  :root {
+    --bg-base: #021716;
+    --bg-deep: #062826;
+    --bg-panel: #042f2e;
+    --bg-card: #134e4a;
+    --bg-raised: #032221;
+    --bg-muted: #115e59;
+    --bg-hover: #0f766e;
+    --bg-line: #0f766e;
+    --bg-soft: #14b8a6;
+  }
+
   body {
-    background-color: #040814;
+    background-color: var(--bg-base);
     color: #f1f5f9;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
@@ -25,32 +37,32 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B132B;
+  background: var(--bg-raised);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1C2541;
+  background: var(--bg-muted);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00B4D8;
+  background: var(--color-cyan-500);
 }
 
 /* Glassmorphism utils */
 .glass-panel {
-  background: rgba(28, 37, 65, 0.75);
+  background: color-mix(in srgb, var(--bg-muted) 75%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-card {
-  background: rgba(11, 19, 43, 0.85);
+  background: color-mix(in srgb, var(--bg-raised) 88%, transparent);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.06);
   transition: all 0.2s ease-in-out;
 }
 
 .glass-card:hover {
-  border-color: rgba(0, 180, 216, 0.4);
-  box-shadow: 0 10px 30px -10px rgba(0, 180, 216, 0.15);
+  border-color: color-mix(in srgb, var(--color-cyan-500) 40%, transparent);
+  box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--color-cyan-500) 15%, transparent);
 }

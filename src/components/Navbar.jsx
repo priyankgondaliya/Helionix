@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X, ArrowRight, ShieldCheck, Send, Layers, Globe, Database, Code2, Server, Cloud, Smartphone, Sparkles, CheckCircle2, HeartPulse, Landmark, Cpu, ShoppingBag, Car } from 'lucide-react';
+import { ChevronDown, Menu, X, ArrowRight, ShieldCheck, Send, Layers, Globe, Database, Code2, Server, Cloud, Smartphone, Sparkles, CheckCircle2, HeartPulse, Landmark, Cpu, ShoppingBag, Car, Bot, Layout } from 'lucide-react';
 import { serviceCategories, industrySolutions, technologyStack } from '../data/siteData';
 import TechIcon from './TechIcon';
+
+const serviceIcons = {
+  'ai-automation': Bot,
+  'cloud-engineering': Cloud,
+  'data-analytics': Database,
+  'digital-experience': Layout,
+};
 
 const industryIcons = {
   healthcare: HeartPulse,
@@ -55,7 +62,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#040814] ${
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#021716] ${
       scrolled ? 'shadow-2xl border-b border-slate-800 py-3.5' : 'py-5 border-b border-slate-800/80'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,13 +70,13 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
           
           {/* Brand Logo - Helonix Technologies */}
           <a href="#" className="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#060C1B] flex items-center justify-center p-1 border border-cyan-400/50 shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform shrink-0">
-              <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-                <rect width="64" height="64" rx="14" fill="#060C1B"/>
-                <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#00E5FF" strokeWidth="3.5" strokeOpacity="0.9"/>
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#062826] flex items-center justify-center p-1 border border-cyan-400/50 shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform shrink-0">
+              <svg viewBox="0 0 64 64" fill="none" className="w-full h-full text-cyan-400">
+                <rect width="64" height="64" rx="14" fill="var(--bg-deep)"/>
+                <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="currentColor" strokeWidth="3.5" strokeOpacity="0.9"/>
                 <path d="M18 14v36M46 14v36M18 32h28" stroke="#FFFFFF" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M24 20l16 24M40 20l-16 24" stroke="#00E5FF" strokeWidth="4" strokeLinecap="round" opacity="0.9"/>
-                <circle cx="32" cy="32" r="6" fill="#00E5FF"/>
+                <path d="M24 20l16 24M40 20l-16 24" stroke="currentColor" strokeWidth="4" strokeLinecap="round" opacity="0.9"/>
+                <circle cx="32" cy="32" r="6" fill="currentColor"/>
               </svg>
             </div>
             <div className="flex flex-col min-w-0">
@@ -102,21 +109,26 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                   style={{ top: dropdownTop }}
                 >
                   <div 
-                    style={{ backgroundColor: '#070c18', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
+                    style={{ backgroundColor: '#042f2e', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
                     className="rounded-2xl p-6 sm:p-8 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 gap-5"
                   >
-                    {serviceCategories.map((cat) => (
+                    {serviceCategories.map((cat) => {
+                      const ServiceIcon = serviceIcons[cat.id] || Bot;
+                      return (
                       <button 
                         key={cat.id} 
                         onClick={() => handleServiceClick(cat.id)}
-                        style={{ backgroundColor: '#0f172a' }}
-                        className="h-full p-5 sm:p-6 rounded-xl hover:bg-[#1e293b] transition-all border border-slate-800 hover:border-cyan-500/60 group text-left flex flex-col"
+                        style={{ backgroundColor: '#134e4a' }}
+                        className="h-full p-5 sm:p-6 rounded-xl hover:bg-[#0f766e] transition-all border border-slate-800 hover:border-cyan-500/60 group text-left flex flex-col"
                       >
                         <div className="flex items-start justify-between gap-4 mb-3">
-                          <span className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition-colors leading-snug">
-                            {cat.title}
+                          <span className="flex items-center gap-2.5 text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition-colors leading-snug">
+                            <span className="p-1.5 rounded-lg bg-navy-950 border border-slate-800 text-cyan-400 group-hover:border-cyan-500/50 transition-colors shrink-0">
+                              <ServiceIcon className="w-5 h-5 text-cyan-400" />
+                            </span>
+                            <span>{cat.title}</span>
                           </span>
-                          <span className="shrink-0 text-[11px] sm:text-xs uppercase font-bold text-cyan-400 bg-[#040814] px-2.5 py-1 rounded-full border border-cyan-800 text-center leading-tight">
+                          <span className="shrink-0 text-[11px] sm:text-xs uppercase font-bold text-cyan-400 bg-[#021716] px-2.5 py-1 rounded-full border border-cyan-800 text-center leading-tight">
                             {cat.badge}
                           </span>
                         </div>
@@ -124,7 +136,8 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                           {cat.description}
                         </p>
                       </button>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -147,7 +160,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                   style={{ top: dropdownTop }}
                 >
                   <div 
-                    style={{ backgroundColor: '#070c18', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
+                    style={{ backgroundColor: '#042f2e', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
                     className="rounded-2xl p-6 sm:p-8 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 xl:grid-cols-3 gap-5"
                   >
                     {technologyStack.map((techGroup) => {
@@ -159,8 +172,8 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                         <button 
                           key={techGroup.category} 
                           onClick={() => handleTechClick(techGroup.category)}
-                          style={{ backgroundColor: '#0f172a' }}
-                          className="p-5 sm:p-6 rounded-xl hover:bg-[#1e293b] transition-all border border-slate-800 hover:border-cyan-500/60 group text-left space-y-4 flex flex-col justify-between"
+                          style={{ backgroundColor: '#134e4a' }}
+                          className="p-5 sm:p-6 rounded-xl hover:bg-[#0f766e] transition-all border border-slate-800 hover:border-cyan-500/60 group text-left space-y-4 flex flex-col justify-between"
                         >
                           <div className="space-y-3">
                             <div className="flex items-center justify-between">
@@ -177,7 +190,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                           </div>
                           <div className="flex flex-wrap gap-2 pt-1">
                             {techGroup.items.slice(0, 4).map((item, iIdx) => (
-                              <span key={iIdx} className="text-xs font-semibold text-slate-200 bg-[#040814] px-2.5 py-1 rounded-md border border-slate-800 flex items-center gap-1.5 group-hover:border-slate-700">
+                              <span key={iIdx} className="text-xs font-semibold text-slate-200 bg-[#021716] px-2.5 py-1 rounded-md border border-slate-800 flex items-center gap-1.5 group-hover:border-slate-700">
                                 <TechIcon name={item.name} className="w-4 h-4 shrink-0" />
                                 <span>{item.name}</span>
                               </span>
@@ -208,7 +221,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                   style={{ top: dropdownTop }}
                 >
                   <div 
-                    style={{ backgroundColor: '#070c18', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
+                    style={{ backgroundColor: '#042f2e', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
                     className="rounded-2xl p-6 sm:p-8 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 xl:grid-cols-3 gap-5"
                   >
                     {industrySolutions.map((ind) => {
@@ -217,8 +230,8 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                       <button 
                         key={ind.id} 
                         onClick={() => handleIndustryClick(ind.id)}
-                        style={{ backgroundColor: '#0f172a' }}
-                        className="h-full p-5 sm:p-6 rounded-xl hover:bg-[#1e293b] transition-all border border-slate-800 hover:border-cyan-500/60 group text-left flex flex-col justify-between gap-4"
+                        style={{ backgroundColor: '#134e4a' }}
+                        className="h-full p-5 sm:p-6 rounded-xl hover:bg-[#0f766e] transition-all border border-slate-800 hover:border-cyan-500/60 group text-left flex flex-col justify-between gap-4"
                       >
                         <div className="space-y-3">
                           <span className="flex items-center gap-2.5 text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition-colors leading-snug">
@@ -231,7 +244,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                             {ind.summary}
                           </p>
                         </div>
-                        <span className="self-start text-xs font-semibold text-cyan-400 bg-[#040814] border border-cyan-800 px-2.5 py-1 rounded-full">
+                        <span className="self-start text-xs font-semibold text-cyan-400 bg-[#021716] border border-cyan-800 px-2.5 py-1 rounded-full">
                           {ind.stats}
                         </span>
                       </button>
@@ -262,7 +275,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
               onClick={onOpenContact} 
               className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-xs font-semibold text-white rounded-xl group bg-gradient-to-br from-cyan-500 to-blue-600 group-hover:from-cyan-500 group-hover:to-blue-600 hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
             >
-              <span className="relative px-3.5 2xl:px-4 py-2.5 transition-all ease-in duration-75 bg-[#040814] rounded-[10px] group-hover:bg-opacity-0 flex items-center gap-2 whitespace-nowrap">
+              <span className="relative px-3.5 2xl:px-4 py-2.5 transition-all ease-in duration-75 bg-[#021716] rounded-[10px] group-hover:bg-opacity-0 flex items-center gap-2 whitespace-nowrap">
                 <span>Schedule Consultation</span>
                 <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:text-white transition-colors" />
               </span>
@@ -284,19 +297,23 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="xl:hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto bg-[#040814] border-b border-slate-800 px-4 pt-4 pb-6 space-y-4">
+        <div className="xl:hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto bg-[#021716] border-b border-slate-800 px-4 pt-4 pb-6 space-y-4">
           
           <div className="space-y-2">
             <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-2">Services</div>
-            {serviceCategories.map((cat) => (
+            {serviceCategories.map((cat) => {
+              const ServiceIcon = serviceIcons[cat.id] || Bot;
+              return (
               <button
                 key={cat.id}
                 onClick={() => handleServiceClick(cat.id)}
-                className="w-full text-left block px-3 py-2 rounded-lg text-sm text-slate-200 hover:bg-slate-800 hover:text-cyan-400"
+                className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-slate-200 hover:bg-slate-800 hover:text-cyan-400"
               >
-                {cat.title}
+                <ServiceIcon className="w-4 h-4 text-cyan-400 shrink-0" />
+                <span>{cat.title}</span>
               </button>
-            ))}
+              );
+            })}
           </div>
 
           <div className="pt-2 border-t border-slate-800 space-y-2">

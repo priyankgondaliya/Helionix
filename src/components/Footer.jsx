@@ -35,7 +35,7 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
   };
 
   return (
-    <footer className="bg-[#040814] text-slate-400 text-xs border-t border-slate-800">
+    <footer className="bg-[#021716] text-slate-400 text-xs border-t border-slate-800">
       
       {/* Top Newsletter Bar (Commented out as requested)
       <div className="border-b border-slate-800/80 py-12 bg-navy-900/40">
@@ -81,13 +81,13 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
         {/* Brand Column - Helonix Technologies */}
         <div className="space-y-4 pr-4">
           <a href="#" className="flex items-center gap-3 group shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-[#060C1B] flex items-center justify-center p-1 border border-cyan-400/50 shadow-lg shadow-cyan-500/25 shrink-0">
-              <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-                <rect width="64" height="64" rx="14" fill="#060C1B"/>
-                <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#00E5FF" strokeWidth="3.5" strokeOpacity="0.9"/>
+            <div className="w-9 h-9 rounded-xl bg-[#062826] flex items-center justify-center p-1 border border-cyan-400/50 shadow-lg shadow-cyan-500/25 shrink-0">
+              <svg viewBox="0 0 64 64" fill="none" className="w-full h-full text-cyan-400">
+                <rect width="64" height="64" rx="14" fill="var(--bg-deep)"/>
+                <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="currentColor" strokeWidth="3.5" strokeOpacity="0.9"/>
                 <path d="M18 14v36M46 14v36M18 32h28" stroke="#FFFFFF" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M24 20l16 24M40 20l-16 24" stroke="#00E5FF" strokeWidth="4" strokeLinecap="round" opacity="0.9"/>
-                <circle cx="32" cy="32" r="6" fill="#00E5FF"/>
+                <path d="M24 20l16 24M40 20l-16 24" stroke="currentColor" strokeWidth="4" strokeLinecap="round" opacity="0.9"/>
+                <circle cx="32" cy="32" r="6" fill="currentColor"/>
               </svg>
             </div>
             <span className="text-lg font-black tracking-tight text-white font-sans whitespace-nowrap">
@@ -175,7 +175,7 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
       </div>
 
       {/* Bottom Copyright Bar */}
-      <div className="border-t border-slate-900 py-6 bg-[#040814]">
+      <div className="border-t border-slate-900 py-6 bg-[#021716]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div>
             © {new Date().getFullYear()} Helionix Technologies Inc. All rights reserved.

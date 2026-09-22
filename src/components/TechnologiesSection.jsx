@@ -101,7 +101,7 @@ export default function TechnologiesSection({ onOpenContact, activeCategory = "a
                       
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3.5">
-                          <div className="w-12 h-12 rounded-xl bg-[#040814] border border-slate-700/80 flex items-center justify-center p-2.5 group-hover:scale-105 transition-transform shadow-inner shrink-0">
+                          <div className="w-12 h-12 rounded-xl bg-[#021716] border border-slate-700/80 flex items-center justify-center p-2.5 group-hover:scale-105 transition-transform shadow-inner shrink-0">
                             <TechIcon name={tech.name} className="w-7 h-7" />
                           </div>
                           <div>

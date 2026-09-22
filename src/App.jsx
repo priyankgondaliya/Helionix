@@ -89,9 +89,9 @@ export default function App() {
         position="top-right" 
         toastOptions={{
           style: {
-            background: '#040814',
+            background: '#042f2e',
             color: '#FFFFFF',
-            border: '1px solid #1E293B',
+            border: '1px solid #115e59',
             borderRadius: '12px',
             fontSize: '13px',
             fontWeight: '600',
@@ -100,7 +100,7 @@ export default function App() {
           success: {
             iconTheme: {
               primary: '#00E5FF',
-              secondary: '#040814',
+              secondary: '#021716',
             },
           },
         }}
