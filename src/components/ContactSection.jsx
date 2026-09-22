@@ -65,17 +65,18 @@ export default function ContactSection({ isOpenModal = false, onCloseModal = nul
     try {
       const res = await sendContactEmail(data);
       if (res.success) {
-        toast.success(`Request Received & Email Notification Sent!`, { id: toastId, duration: 5000 });
+        toast.success(`Request Received & Email Sent Successfully!`, { id: toastId, duration: 5000 });
+        setSubmittedData(data);
+        setFormSubmitted(true);
+        reset();
       } else {
-        toast.success(`Request Received! Thank you, ${data.fullName}.`, { id: toastId, duration: 5000 });
+        const errorMsg = typeof res.error === 'string' ? res.error : (res.error?.message || 'Failed to send email inquiry');
+        toast.error(`Email Error: ${errorMsg}`, { id: toastId, duration: 7000 });
       }
     } catch (err) {
-      toast.success(`Request Received! Thank you, ${data.fullName}.`, { id: toastId, duration: 5000 });
+      toast.error(`Failed to submit: ${err.message || 'Network error'}`, { id: toastId, duration: 7000 });
     } finally {
       setIsSending(false);
-      setSubmittedData(data);
-      setFormSubmitted(true);
-      reset();
     }
   };
 

@@ -4,15 +4,10 @@
 export async function sendContactEmail(formData) {
   const apiKey = import.meta.env.VITE_RESEND_API_KEY;
 
-  if (!apiKey) {
-    console.warn("VITE_RESEND_API_KEY is not defined in environment variables.");
-    return { success: false, message: "API Key missing" };
-  }
-
   const emailHtml = `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #040814; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; color: #e2e8f0;">
       <div style="background-color: #060c1b; padding: 24px; border-bottom: 1px solid #00e5ff33; text-align: center;">
-        <h2 style="color: #00e5ff; margin: 0; font-size: 22px; tracking-tight: -0.5px;">HELIONIX TECHNOLOGIES</h2>
+        <h2 style="color: #00e5ff; margin: 0; font-size: 22px;">HELIONIX TECHNOLOGIES</h2>
         <p style="color: #94a3b8; font-size: 13px; margin-top: 4px;">New Enterprise Consultation Inquiry</p>
       </div>
 
@@ -50,7 +45,7 @@ export async function sendContactEmail(formData) {
             <td style="padding: 12px 0 6px 0; color: #94a3b8; font-weight: 600;" colspan="2">Project Objectives / Details</td>
           </tr>
           <tr>
-            <td colspan="2" style="padding: 12px; background-color: #0b1329; border-radius: 8px; color: #cbd5e1; font-size: 13px; line-height: 1.6; white-space: pre-wrap;">${formData.details || 'No additional details specified.'}</td>
+            <td colspan="2" style="padding: 12px; background-color: #0b1329; border-radius: 8px; color: #cbd5e1; font-size: 13px; line-height: 1.6;">${formData.details || 'No additional details specified.'}</td>
           </tr>
         </table>
       </div>
@@ -61,31 +56,40 @@ export async function sendContactEmail(formData) {
     </div>
   `;
 
+  const payload = {
+    from: 'Helionix Technologies <onboarding@resend.dev>',
+    to: ['helionixtechnologies@gmail.com'],
+    subject: `New Enterprise Inquiry: ${formData.fullName} (${formData.company})`,
+    html: emailHtml,
+  };
+
+  const isDev = import.meta.env.DEV;
+  const endpoint = isDev ? '/api/resend/emails' : 'https://api.resend.com/emails';
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  if (!isDev && apiKey) {
+    headers['Authorization'] = `Bearer ${apiKey}`;
+  }
+
   try {
-    const response = await fetch('https://api.resend.com/emails', {
+    const response = await fetch(endpoint, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Helionix Technologies <onboarding@resend.dev>',
-        to: ['helionixtechnologies@gmail.com'],
-        subject: `New Enterprise Inquiry: ${formData.fullName} (${formData.company})`,
-        html: emailHtml,
-      }),
+      headers,
+      body: JSON.stringify(payload),
     });
 
     const data = await response.json();
 
-    if (response.ok) {
+    if (response.ok && data && data.id) {
       return { success: true, data };
     } else {
-      console.error('Resend API Error:', data);
-      return { success: false, error: data };
+      const errorMsg = data.message || data.name || (typeof data === 'string' ? data : 'Resend API rejected email delivery.');
+      return { success: false, error: errorMsg };
     }
   } catch (error) {
-    console.error('Failed to send email via Resend API:', error);
-    return { success: false, error };
+    return { success: false, error: error.message || 'Network error while attempting to send email.' };
   }
 }
