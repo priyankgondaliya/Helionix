@@ -1,6 +1,85 @@
-import React from 'react';
-import { ShieldCheck, ArrowRight, CheckCircle2, Award, Zap, TrendingUp } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ShieldCheck, ArrowRight, CheckCircle2, Award, Zap } from 'lucide-react';
 import { siteConfig } from '../data/siteData';
+
+function parseStatValue(value) {
+  const match = String(value).match(/^([^0-9]*)([0-9][0-9,]*(?:\.[0-9]+)?)(.*)$/);
+  if (!match) return { prefix: '', number: 0, decimals: 0, suffix: '' };
+  const numeric = match[2].replace(/,/g, '');
+  const decimals = numeric.includes('.') ? numeric.split('.')[1].length : 0;
+  return {
+    prefix: match[1],
+    number: Number(numeric),
+    decimals,
+    suffix: match[3],
+  };
+}
+
+function formatStatNumber(value, decimals) {
+  return value.toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+}
+
+function CountUpStat({ value, delay = 0 }) {
+  const { prefix, number, decimals, suffix } = parseStatValue(value);
+  const [display, setDisplay] = useState(() => formatStatNumber(0, decimals));
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let frame = 0;
+    let started = false;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const run = () => {
+      if (started) return;
+      started = true;
+      if (reduced) {
+        setDisplay(formatStatNumber(number, decimals));
+        return;
+      }
+
+      const duration = 1700;
+      const begin = performance.now() + delay;
+      const tick = (now) => {
+        const elapsed = now - begin;
+        if (elapsed < 0) {
+          frame = requestAnimationFrame(tick);
+          return;
+        }
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = progress === 1 ? number : number * eased;
+        setDisplay(formatStatNumber(current, decimals));
+        if (progress < 1) frame = requestAnimationFrame(tick);
+      };
+      frame = requestAnimationFrame(tick);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        run();
+        observer.disconnect();
+      }
+    }, { threshold: 0.4 });
+
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [number, decimals, delay]);
+
+  return (
+    <span ref={ref}>
+      {prefix}{display}{suffix}
+    </span>
+  );
+}
 
 export default function Hero({ onOpenContact }) {
   return (
@@ -80,8 +159,8 @@ export default function Hero({ onOpenContact }) {
           {siteConfig.stats.map((stat, idx) => (
             <div key={idx} className="glass-card rounded-2xl p-6 text-center relative overflow-hidden group">
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-1 group-hover:text-cyan-400 transition-colors">
-                {stat.value}
+              <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-1 tabular-nums group-hover:text-cyan-400 transition-colors">
+                <CountUpStat value={stat.value} delay={idx * 160} />
               </div>
               <div className="text-xs sm:text-sm font-medium text-slate-400">
                 {stat.label}
