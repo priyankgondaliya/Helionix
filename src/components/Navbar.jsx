@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X, ArrowRight, ShieldCheck, PhoneCall, Layers, Globe, Database, Code2, Server, Cloud, Smartphone, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, Menu, X, ArrowRight, ShieldCheck, Send, Layers, Globe, Database, Code2, Server, Cloud, Smartphone, Sparkles, CheckCircle2 } from 'lucide-react';
 import { serviceCategories, industrySolutions, technologyStack } from '../data/siteData';
 import TechIcon from './TechIcon';
 
@@ -327,7 +327,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
               }}
               className="w-full py-3 px-4 rounded-xl bg-cyan-500 text-navy-950 font-semibold text-sm hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2"
             >
-              <PhoneCall className="w-4 h-4" />
+              <Send className="w-4 h-4" />
               <span>Schedule Client Consultation</span>
             </button>
           </div>

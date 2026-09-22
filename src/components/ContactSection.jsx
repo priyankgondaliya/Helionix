@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import toast from 'react-hot-toast';
-import { Send, PhoneCall, Mail, MapPin, CheckCircle, ShieldCheck, Sparkles, AlertCircle } from 'lucide-react';
+import { Send, Mail, MapPin, CheckCircle, ShieldCheck, Sparkles, AlertCircle } from 'lucide-react';
 import { globalOffices } from '../data/siteData';
 
 // Joi Schema Validation (No HTML browser validations)
@@ -314,17 +314,7 @@ export default function ContactSection({ isOpenModal = false, onCloseModal = nul
                 </div>
                 <div>
                   <div className="text-xs text-slate-400 font-medium">Enterprise Inquiries</div>
-                  <div className="text-sm font-bold text-white">consulting@helionixtechnologies.com</div>
-                </div>
-              </div>
-
-              <div className="glass-card rounded-xl p-4 border border-slate-800 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg bg-navy-900 border border-slate-700 flex items-center justify-center text-cyan-400">
-                  <PhoneCall className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs text-slate-400 font-medium">Global Sales Line</div>
-                  <div className="text-sm font-bold text-white">+1 (800) 450-HELIONIX</div>
+                  <div className="text-sm font-bold text-white">helionixtechnologies@gmail.com</div>
                 </div>
               </div>
             </div>
