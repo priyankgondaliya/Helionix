@@ -7,7 +7,7 @@ export default function CaseStudies({ onOpenContact }) {
   const [selectedCase, setSelectedCase] = useState(null);
 
   return (
-    <section id="case-studies" className="py-24 bg-navy-900 border-t border-slate-800/80">
+    <section id="case-studies" className="pt-32 pb-24 bg-navy-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

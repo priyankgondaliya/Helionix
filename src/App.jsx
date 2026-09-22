@@ -1,17 +1,44 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import ServicesSection from './components/ServicesSection';
-import TechnologiesSection from './components/TechnologiesSection';
-import PlatformSpotlight from './components/PlatformSpotlight';
-import IndustrySolutions from './components/IndustrySolutions';
-import CaseStudies from './components/CaseStudies';
-import EcosystemPartners from './components/EcosystemPartners';
-import Testimonials from './components/Testimonials';
-import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import { serviceCategories, industrySolutions, technologyStack } from './data/siteData';
+import ContactSection from './components/ContactSection';
+import HomePage from './pages/HomePage';
+import PlatformPage from './pages/PlatformPage';
+import CaseStudiesPage from './pages/CaseStudiesPage';
+import AboutPage from './pages/AboutPage';
+import { serviceCategories, industrySolutions } from './data/siteData';
+
+function ScrollManager() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const target = location.state?.scrollTo;
+    if (!target) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      return;
+    }
+
+    let cancelled = false;
+    const tryScroll = () => {
+      if (cancelled) return;
+      const el = document.getElementById(target);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const frame = requestAnimationFrame(() => {
+      setTimeout(tryScroll, 60);
+    });
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(frame);
+    };
+  }, [location.pathname, location.key]);
+
+  return null;
+}
 
 export default function App() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -22,71 +49,10 @@ export default function App() {
   const handleOpenContact = () => setIsContactModalOpen(true);
   const handleCloseContact = () => setIsContactModalOpen(false);
 
-  // Dynamic Document Title based on visible section and selected category
-  useEffect(() => {
-    const getTitleForSection = (sectionId) => {
-      switch (sectionId) {
-        case 'hero':
-          return 'Helionix Technologies - Enterprise AI, Data & Digital Engineering Solutions';
-        case 'services': {
-          const currentCat = serviceCategories.find(c => c.id === activeServiceTab);
-          return currentCat 
-            ? `${currentCat.title} | Helionix Technologies` 
-            : 'Services | Helionix Technologies';
-        }
-        case 'technologies': {
-          const currentTech = technologyStack.find(t => t.category === activeTechCategory);
-          return currentTech 
-            ? `${currentTech.title} | Helionix Technologies` 
-            : 'Technologies & Tech Stack | Helionix Technologies';
-        }
-        case 'platform':
-          return 'HelionixRise™ AI Platform | Helionix Technologies';
-        case 'industries': {
-          const currentInd = industrySolutions.find(i => i.id === activeIndustryTab);
-          return currentInd 
-            ? `${currentInd.name} Solutions | Helionix Technologies` 
-            : 'Industry Solutions | Helionix Technologies';
-        }
-        case 'case-studies':
-          return 'Enterprise Case Studies | Helionix Technologies';
-        case 'contact':
-          return 'Contact & About Us | Helionix Technologies';
-        default:
-          return 'Helionix Technologies - Enterprise AI, Data & Digital Engineering Solutions';
-      }
-    };
-
-    const sectionIds = ['hero', 'services', 'technologies', 'platform', 'industries', 'case-studies', 'contact'];
-    let currentIntersectedId = 'hero';
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            currentIntersectedId = entry.target.id;
-            document.title = getTitleForSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    // Initial title update
-    document.title = getTitleForSection('hero');
-
-    return () => observer.disconnect();
-  }, [activeServiceTab, activeTechCategory, activeIndustryTab]);
-
   return (
     <div className="min-h-screen bg-navy-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-navy-950">
-      <Toaster 
-        position="top-right" 
+      <Toaster
+        position="top-right"
         toastOptions={{
           style: {
             background: '#042f2e',
@@ -105,64 +71,56 @@ export default function App() {
           },
         }}
       />
-      
-      {/* Navigation Header */}
-      <Navbar 
+
+      <ScrollManager />
+
+      <Navbar
         onOpenContact={handleOpenContact}
         onSelectService={(id) => setActiveServiceTab(id)}
         onSelectIndustry={(id) => setActiveIndustryTab(id)}
         onSelectTechnology={(cat) => setActiveTechCategory(cat)}
       />
 
-      {/* Main Section Content */}
-      <main className="flex-grow">
-        <Hero onOpenContact={handleOpenContact} />
-        
-        <ServicesSection 
-          onOpenContact={handleOpenContact} 
-          activeTab={activeServiceTab}
-          onSelectTab={(id) => setActiveServiceTab(id)}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HomePage
+              onOpenContact={handleOpenContact}
+              activeServiceTab={activeServiceTab}
+              onSelectServiceTab={(id) => setActiveServiceTab(id)}
+              activeIndustryTab={activeIndustryTab}
+              onSelectIndustryTab={(id) => setActiveIndustryTab(id)}
+              activeTechCategory={activeTechCategory}
+              onSelectTechCategory={(cat) => setActiveTechCategory(cat)}
+            />
+          }
         />
-        
-        <TechnologiesSection 
-          onOpenContact={handleOpenContact}
-          activeCategory={activeTechCategory}
-          onSelectCategory={(cat) => setActiveTechCategory(cat)}
+        <Route
+          path="/platform"
+          element={<PlatformPage onOpenContact={handleOpenContact} />}
         />
-        
-        <PlatformSpotlight onOpenContact={handleOpenContact} />
-        
-        <IndustrySolutions 
-          onOpenContact={handleOpenContact}
-          activeTab={activeIndustryTab}
-          onSelectTab={(id) => setActiveIndustryTab(id)}
+        <Route
+          path="/case-studies"
+          element={<CaseStudiesPage onOpenContact={handleOpenContact} />}
         />
-        
-        <CaseStudies onOpenContact={handleOpenContact} />
-        <EcosystemPartners />
-        
-        {/* Testimonials & Ratings Section (Commented out as requested) */}
-        {/* <Testimonials /> */}
-        
-        <ContactSection />
-      </main>
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
 
-      {/* Corporate Footer */}
-      <Footer 
-        onOpenContact={handleOpenContact} 
+      <Footer
+        onOpenContact={handleOpenContact}
         onSelectService={(id) => setActiveServiceTab(id)}
         onSelectIndustry={(id) => setActiveIndustryTab(id)}
         onSelectTechnology={(cat) => setActiveTechCategory(cat)}
       />
 
-      {/* Global Contact / Consultation Popup Modal */}
       {isContactModalOpen && (
-        <ContactSection 
-          isOpenModal={true} 
-          onCloseModal={handleCloseContact} 
+        <ContactSection
+          isOpenModal={true}
+          onCloseModal={handleCloseContact}
         />
       )}
-
     </div>
   );
 }

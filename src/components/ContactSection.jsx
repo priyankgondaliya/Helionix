@@ -308,7 +308,7 @@ export default function ContactSection({ isOpenModal = false, onCloseModal = nul
   }
 
   return (
-    <section id="contact" className="py-24 bg-navy-950 border-t border-slate-800/80">
+    <section id="contact" className="pt-12 pb-24 bg-navy-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">

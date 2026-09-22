@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X, ArrowRight, ShieldCheck, Send, Layers, Globe, Database, Code2, Server, Cloud, Smartphone, Sparkles, CheckCircle2, HeartPulse, Landmark, Cpu, ShoppingBag, Car, Bot, Layout } from 'lucide-react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { ChevronDown, Menu, X, ArrowRight, Send, Globe, Database, Code2, Server, Cloud, Smartphone, Sparkles, HeartPulse, Landmark, Cpu, ShoppingBag, Car, Bot, Layout } from 'lucide-react';
 import { serviceCategories, industrySolutions, technologyStack } from '../data/siteData';
 import TechIcon from './TechIcon';
 
@@ -19,10 +20,21 @@ const industryIcons = {
 };
 
 export default function Navbar({ onOpenContact, onSelectService, onSelectIndustry, onSelectTechnology }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [dropdownTop, setDropdownTop] = useState(0);
+
+  const goHomeSection = (sectionId) => {
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionId } });
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const openDropdown = (name, event) => {
     setDropdownTop(event.currentTarget.getBoundingClientRect().bottom);
@@ -41,24 +53,21 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
     if (onSelectService) onSelectService(catId);
     setActiveDropdown(null);
     setMobileMenuOpen(false);
-    const el = document.getElementById('services');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    goHomeSection('services');
   };
 
   const handleIndustryClick = (indId) => {
     if (onSelectIndustry) onSelectIndustry(indId);
     setActiveDropdown(null);
     setMobileMenuOpen(false);
-    const el = document.getElementById('industries');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    goHomeSection('industries');
   };
 
   const handleTechClick = (techCat) => {
     if (onSelectTechnology) onSelectTechnology(techCat);
     setActiveDropdown(null);
     setMobileMenuOpen(false);
-    const el = document.getElementById('technologies');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    goHomeSection('technologies');
   };
 
   return (
@@ -69,7 +78,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
         <div className="flex items-center justify-between gap-3 xl:gap-5">
           
           {/* Brand Logo - Helonix Technologies */}
-          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
+          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#062826] flex items-center justify-center p-1 border border-cyan-400/50 shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform shrink-0">
               <svg viewBox="0 0 64 64" fill="none" className="w-full h-full text-cyan-400">
                 <rect width="64" height="64" rx="14" fill="var(--bg-deep)"/>
@@ -87,7 +96,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                 Next-Gen Enterprise Cloud & AI
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-3 2xl:gap-6 shrink-0">
@@ -255,18 +264,39 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
               )}
             </div>
 
-            <a href="#platform" className="text-sm font-semibold text-slate-200 hover:text-cyan-400 transition-colors flex items-center gap-1.5 whitespace-nowrap">
+            <NavLink
+              to="/platform"
+              className={({ isActive }) =>
+                `text-sm font-semibold transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                  isActive ? 'text-cyan-400' : 'text-slate-200 hover:text-cyan-400'
+                }`
+              }
+            >
               <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
               <span>HelionixRise™ AI</span>
-            </a>
+            </NavLink>
 
-            <a href="#case-studies" className="text-sm font-semibold text-slate-200 hover:text-cyan-400 transition-colors whitespace-nowrap">
+            <NavLink
+              to="/case-studies"
+              className={({ isActive }) =>
+                `text-sm font-semibold transition-colors whitespace-nowrap ${
+                  isActive ? 'text-cyan-400' : 'text-slate-200 hover:text-cyan-400'
+                }`
+              }
+            >
               Case Studies
-            </a>
+            </NavLink>
 
-            <a href="#contact" className="text-sm font-semibold text-slate-200 hover:text-cyan-400 transition-colors whitespace-nowrap">
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `text-sm font-semibold transition-colors whitespace-nowrap ${
+                  isActive ? 'text-cyan-400' : 'text-slate-200 hover:text-cyan-400'
+                }`
+              }
+            >
               About Us
-            </a>
+            </NavLink>
           </nav>
 
           {/* Action Buttons */}
@@ -353,27 +383,27 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
           </div>
 
           <div className="pt-2 border-t border-slate-800 space-y-2">
-            <a
-              href="#platform"
+            <Link
+              to="/platform"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm text-cyan-400 font-medium hover:bg-slate-800"
             >
               HelionixRise™ Agentic AI Platform
-            </a>
-            <a
-              href="#case-studies"
+            </Link>
+            <Link
+              to="/case-studies"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm text-slate-200 hover:bg-slate-800"
             >
               Success Stories & Case Studies
-            </a>
-            <a
-              href="#contact"
+            </Link>
+            <Link
+              to="/about"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm text-slate-200 hover:bg-slate-800"
             >
-              Contact Us
-            </a>
+              About Us
+            </Link>
           </div>
 
           <div className="pt-2">

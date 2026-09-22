@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
-import { ArrowRight, Check, Mail } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ArrowRight, Check } from 'lucide-react';
 import { serviceCategories, industrySolutions } from '../data/siteData';
 
 export default function Footer({ onOpenContact, onSelectService, onSelectIndustry, onSelectTechnology }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [subscribed, setSubscribed] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState('');
+
+  const goHomeSection = (sectionId) => {
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionId } });
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -13,25 +25,17 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
 
   const handleServiceClick = (catId) => {
     if (onSelectService) onSelectService(catId);
-    const el = document.getElementById('services');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    goHomeSection('services');
   };
 
   const handleIndustryClick = (indId) => {
     if (onSelectIndustry) onSelectIndustry(indId);
-    const el = document.getElementById('industries');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    goHomeSection('industries');
   };
 
   const handleTechClick = (cat = 'all') => {
     if (onSelectTechnology) onSelectTechnology(cat);
-    const el = document.getElementById('technologies');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleNavClick = (targetId) => {
-    const el = document.getElementById(targetId);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    goHomeSection('technologies');
   };
 
   return (
@@ -80,7 +84,7 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
         
         {/* Brand Column - Helonix Technologies */}
         <div className="space-y-4 pr-4">
-          <a href="#" className="flex items-center gap-3 group shrink-0">
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
             <div className="w-9 h-9 rounded-xl bg-[#062826] flex items-center justify-center p-1 border border-cyan-400/50 shadow-lg shadow-cyan-500/25 shrink-0">
               <svg viewBox="0 0 64 64" fill="none" className="w-full h-full text-cyan-400">
                 <rect width="64" height="64" rx="14" fill="var(--bg-deep)"/>
@@ -93,7 +97,7 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
             <span className="text-lg font-black tracking-tight text-white font-sans whitespace-nowrap">
               HELIONIX <span className="text-cyan-400 font-extrabold">TECHNOLOGIES</span>
             </span>
-          </a>
+          </Link>
 
           <p className="text-xs text-slate-400 leading-relaxed">
             Helionix Technologies is a leading AI, data, and digital engineering company helping enterprise leaders accelerate innovation, modernize legacy platforms, and achieve digital velocity.
@@ -115,9 +119,9 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
               </li>
             ))}
             <li>
-              <button onClick={() => handleNavClick('platform')} className="text-cyan-400 hover:underline text-left">
+              <Link to="/platform" className="text-cyan-400 hover:underline text-left">
                 HelionixRise™ Agentic AI
-              </button>
+              </Link>
             </li>
           </ul>
         </div>
@@ -149,19 +153,24 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavClick('case-studies')} className="hover:text-cyan-400 transition-colors text-left">
+              <Link to="/case-studies" className="hover:text-cyan-400 transition-colors text-left">
                 Success Stories & Case Studies
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={() => handleNavClick('platform')} className="hover:text-cyan-400 transition-colors text-left">
+              <Link to="/platform" className="hover:text-cyan-400 transition-colors text-left">
                 HelionixRise™ AI Platform
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={() => handleNavClick('partners')} className="hover:text-cyan-400 transition-colors text-left">
+              <button onClick={() => goHomeSection('partners')} className="hover:text-cyan-400 transition-colors text-left">
                 Partner Ecosystem
               </button>
+            </li>
+            <li>
+              <Link to="/about" className="hover:text-cyan-400 transition-colors text-left">
+                About Us
+              </Link>
             </li>
             <li>
               <button onClick={onOpenContact} className="text-cyan-400 font-semibold hover:underline text-left flex items-center gap-1">

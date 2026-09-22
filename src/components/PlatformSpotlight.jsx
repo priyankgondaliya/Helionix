@@ -1,10 +1,11 @@
 import React from 'react';
-import { Sparkles, Shield, Cpu, Zap, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { platformSpotlight } from '../data/siteData';
 
 export default function PlatformSpotlight({ onOpenContact }) {
   return (
-    <section id="platform" className="py-24 bg-navy-900 relative overflow-hidden">
+    <section id="platform" className="pt-32 pb-24 bg-navy-900 relative overflow-hidden">
       
       {/* Background Glow */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -58,12 +59,12 @@ export default function PlatformSpotlight({ onOpenContact }) {
                 <ArrowRight className="w-4 h-4 text-navy-950" />
               </button>
 
-              <a
-                href="#case-studies"
+              <Link
+                to="/case-studies"
                 className="px-6 py-3.5 rounded-xl bg-navy-800 border border-slate-700 text-white font-semibold text-sm hover:bg-navy-700 transition-all flex items-center gap-2"
               >
                 <span>View Platform ROI</span>
-              </a>
+              </Link>
             </div>
 
           </div>

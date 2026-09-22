@@ -17,6 +17,7 @@
     "react-dom": "^19.2.8",
     "react-hook-form": "^7.88.0",
     "react-hot-toast": "^2.6.1",
+    "react-router-dom": "^7.18.4",
     "resend": "^6.28.1"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ShieldCheck, ArrowRight, CheckCircle2, Award, Zap } from 'lucide-react';
 import { siteConfig } from '../data/siteData';
 
@@ -127,13 +128,13 @@ export default function Hero({ onOpenContact }) {
               <ArrowRight className="w-5 h-5 text-navy-950" />
             </button>
 
-            <a
-              href="#platform"
+            <Link
+              to="/platform"
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-navy-800/80 border border-slate-700 text-white font-semibold text-base hover:bg-navy-700 hover:border-slate-600 transition-all flex items-center justify-center gap-2.5 backdrop-blur-md"
             >
               <Zap className="w-4 h-4 text-cyan-400" />
               <span>Watch Platform Demo</span>
-            </a>
+            </Link>
           </div>
 
           {/* Trust Compliance Markers */}
