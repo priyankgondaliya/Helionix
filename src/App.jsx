@@ -27,33 +27,33 @@ export default function App() {
     const getTitleForSection = (sectionId) => {
       switch (sectionId) {
         case 'hero':
-          return 'Helonix Technologies - Enterprise AI, Data & Digital Engineering Solutions';
+          return 'Helionix Technologies - Enterprise AI, Data & Digital Engineering Solutions';
         case 'services': {
           const currentCat = serviceCategories.find(c => c.id === activeServiceTab);
           return currentCat 
-            ? `${currentCat.title} | Helonix Technologies` 
-            : 'Services | Helonix Technologies';
+            ? `${currentCat.title} | Helionix Technologies` 
+            : 'Services | Helionix Technologies';
         }
         case 'technologies': {
           const currentTech = technologyStack.find(t => t.category === activeTechCategory);
           return currentTech 
-            ? `${currentTech.title} | Helonix Technologies` 
-            : 'Technologies & Tech Stack | Helonix Technologies';
+            ? `${currentTech.title} | Helionix Technologies` 
+            : 'Technologies & Tech Stack | Helionix Technologies';
         }
         case 'platform':
-          return 'HelonixRise™ AI Platform | Helonix Technologies';
+          return 'HelionixRise™ AI Platform | Helionix Technologies';
         case 'industries': {
           const currentInd = industrySolutions.find(i => i.id === activeIndustryTab);
           return currentInd 
-            ? `${currentInd.name} Solutions | Helonix Technologies` 
-            : 'Industry Solutions | Helonix Technologies';
+            ? `${currentInd.name} Solutions | Helionix Technologies` 
+            : 'Industry Solutions | Helionix Technologies';
         }
         case 'case-studies':
-          return 'Enterprise Case Studies | Helonix Technologies';
+          return 'Enterprise Case Studies | Helionix Technologies';
         case 'contact':
-          return 'Contact & About Us | Helonix Technologies';
+          return 'Contact & About Us | Helionix Technologies';
         default:
-          return 'Helonix Technologies - Enterprise AI, Data & Digital Engineering Solutions';
+          return 'Helionix Technologies - Enterprise AI, Data & Digital Engineering Solutions';
       }
     };
 

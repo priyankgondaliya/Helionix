@@ -1,6 +1,6 @@
 export const siteConfig = {
-  companyName: "Helonix Technologies",
-  shortName: "Helonix",
+  companyName: "Helionix Technologies",
+  shortName: "Helionix",
   tagline: "Engineering Intelligent Enterprises with AI, Data & Cloud Platforms",
   heroSubtitle: "We partner with ambitious enterprises to modernize digital platforms, harness Agentic AI, and build resilient cloud architectures that drive measurable business outcomes.",
   stats: [
@@ -178,13 +178,24 @@ export const technologyStack = [
       { name: "GitHub Actions / CI/CD", desc: "Automated continuous integration and security test pipelines", level: "Automated CI/CD", icon: "github" },
       { name: "Grafana & Prometheus", desc: "Real-time metrics collection, log aggregation, and SRE alerting", level: "Observability", icon: "grafana" },
     ]
+  },
+  {
+    category: "mobile",
+    title: "Mobile App Engineering",
+    description: "Cross-platform iOS & Android applications engineered for fluid UX, offline sync, and app store velocity.",
+    items: [
+      { name: "React Native", desc: "Cross-platform mobile apps using React & native bridge architectures", level: "Cross-Platform Core", icon: "reactnative" },
+      { name: "Flutter", desc: "Google Dart framework for high-performance multi-platform mobile apps", level: "Cross-Platform Core", icon: "flutter" },
+      { name: "Expo Platform", desc: "Universal React Native ecosystem for rapid mobile development and OTA updates", level: "Mobile Ecosystem", icon: "expo" },
+      { name: "Mobile CI/CD", desc: "Automated Fastlane deployment pipelines for App Store & Google Play", level: "Mobile DevOps", icon: "mobile" },
+    ]
   }
 ];
 
 export const platformSpotlight = {
-  name: "HelonixRise™ Agentic AI Platform",
+  name: "HelionixRise™ Agentic AI Platform",
   tagline: "The Enterprise Catalyst for Autonomous Innovation",
-  description: "HelonixRise™ is our proprietary multi-agent orchestrator that empowers non-technical domain experts and developers to build, test, and deploy secure enterprise AI workflows in hours rather than months.",
+  description: "HelionixRise™ is our proprietary multi-agent orchestrator that empowers non-technical domain experts and developers to build, test, and deploy secure enterprise AI workflows in hours rather than months.",
   highlights: [
     { title: "60% Faster MVP Build", text: "Low-code vibe coding canvas enables rapid prototype validation." },
     { title: "Enterprise Guardrails", text: "Built-in SOC2, HIPAA, and ISO27001 data isolation mechanisms." },
@@ -287,7 +298,7 @@ export const caseStudies = [
     industry: "Financial Services",
     impact: "60% Reduction in Time-to-Market",
     challenge: "Product engineering bottlenecks delayed new fintech service launches by up to 9 months per business unit.",
-    solution: "Implemented HelonixRise™ low-code AI platform, democratizing rapid software prototyping for cross-functional business teams.",
+    solution: "Implemented HelionixRise™ low-code AI platform, democratizing rapid software prototyping for cross-functional business teams.",
     results: [
       "MVP turnaround reduced from 8 months to 6 weeks",
       "Direct IT dependency reduced by 40%",
@@ -321,7 +332,7 @@ export const partnerEcosystem = [
 
 export const testimonials = [
   {
-    quote: "Helonix Technologies' deep technical expertise and focus on velocity allowed us to scale our AI platform deployment frequency from twice a week to six times a week with zero infrastructure downtime.",
+    quote: "Helionix Technologies' deep technical expertise and focus on velocity allowed us to scale our AI platform deployment frequency from twice a week to six times a week with zero infrastructure downtime.",
     author: "Mark Fleishman",
     role: "VP of Infrastructure & Operations",
     company: "Diagnostic AI Systems",
@@ -335,7 +346,7 @@ export const testimonials = [
     rating: 5
   },
   {
-    quote: "The leadership at Helonix took genuine time to understand our unique business drivers. Their Agentic AI recommendations transformed our supply chain risk management within 90 days.",
+    quote: "The leadership at Helionix took genuine time to understand our unique business drivers. Their Agentic AI recommendations transformed our supply chain risk management within 90 days.",
     author: "Tim Daniel",
     role: "Senior Advisor for Innovation",
     company: "Global Logistics Group",

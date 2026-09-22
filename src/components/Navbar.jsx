@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X, ArrowRight, ShieldCheck, PhoneCall, Layers, Globe, Database, Code2, Server, Cloud, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, Menu, X, ArrowRight, ShieldCheck, PhoneCall, Layers, Globe, Database, Code2, Server, Cloud, Smartphone, Sparkles, CheckCircle2 } from 'lucide-react';
 import { serviceCategories, industrySolutions, technologyStack } from '../data/siteData';
 import TechIcon from './TechIcon';
 
@@ -60,7 +60,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
             </div>
             <div className="flex flex-col whitespace-nowrap">
               <span className="text-lg sm:text-xl font-black tracking-tight text-white flex items-center gap-1.5 font-sans">
-                HELONIX <span className="text-cyan-400 font-extrabold">TECHNOLOGIES</span>
+                HELIONIX <span className="text-cyan-400 font-extrabold">TECHNOLOGIES</span>
               </span>
               <span className="text-[9px] tracking-widest text-slate-400 font-bold uppercase -mt-1">
                 Next-Gen Enterprise Cloud & AI
@@ -125,40 +125,40 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
               </button>
 
               {activeDropdown === 'technologies' && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[780px] pt-3 z-50">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[860px] pt-3 z-50">
                   <div 
                     style={{ backgroundColor: '#070c18', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
-                    className="rounded-2xl p-6 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 gap-4"
+                    className="rounded-2xl p-6 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 lg:grid-cols-3 gap-3.5"
                   >
                     {technologyStack.map((techGroup) => {
                       const CategoryHeaderIcon = techGroup.category === 'frontend' ? Code2 :
                                                  techGroup.category === 'backend' ? Server :
-                                                 techGroup.category === 'database' ? Database : Cloud;
+                                                 techGroup.category === 'database' ? Database :
+                                                 techGroup.category === 'mobile' ? Smartphone : Cloud;
                       return (
                         <button 
                           key={techGroup.category} 
                           onClick={() => handleTechClick(techGroup.category)}
                           style={{ backgroundColor: '#0f172a' }}
-                          className="p-4 rounded-xl hover:bg-[#1e293b] transition-all border border-slate-800 hover:border-cyan-500/60 group text-left space-y-2.5"
+                          className="p-4 rounded-xl hover:bg-[#1e293b] transition-all border border-slate-800 hover:border-cyan-500/60 group text-left space-y-2.5 flex flex-col justify-between"
                         >
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors flex items-center gap-2">
-                              <span className="p-1.5 rounded-lg bg-navy-950 border border-slate-800 text-cyan-400 group-hover:border-cyan-500/50 transition-colors">
-                                <CategoryHeaderIcon className="w-4 h-4 text-cyan-400 shrink-0" />
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-400 transition-colors flex items-center gap-2">
+                                <span className="p-1 rounded-lg bg-navy-950 border border-slate-800 text-cyan-400 group-hover:border-cyan-500/50 transition-colors">
+                                  <CategoryHeaderIcon className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                                </span>
+                                <span>{techGroup.title}</span>
                               </span>
-                              <span>{techGroup.title}</span>
-                            </span>
-                            <span className="text-[10px] font-mono text-cyan-400 bg-[#040814] px-2 py-0.5 rounded border border-cyan-800 shrink-0">
-                              {techGroup.items.length} Stack Tools
-                            </span>
+                            </div>
+                            <p className="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">
+                              {techGroup.description}
+                            </p>
                           </div>
-                          <p className="text-xs text-slate-300 line-clamp-1">
-                            {techGroup.description}
-                          </p>
                           <div className="flex flex-wrap gap-1.5 pt-1">
                             {techGroup.items.slice(0, 4).map((item, iIdx) => (
-                              <span key={iIdx} className="text-[11px] font-semibold text-slate-200 bg-[#040814] px-2.5 py-1 rounded-md border border-slate-800 flex items-center gap-1.5 group-hover:border-slate-700">
-                                <TechIcon name={item.name} className="w-3.5 h-3.5 shrink-0" />
+                              <span key={iIdx} className="text-[10px] font-semibold text-slate-200 bg-[#040814] px-2 py-0.5 rounded-md border border-slate-800 flex items-center gap-1 group-hover:border-slate-700">
+                                <TechIcon name={item.name} className="w-3 h-3 shrink-0" />
                                 <span>{item.name}</span>
                               </span>
                             ))}
@@ -208,7 +208,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
 
             <a href="#platform" className="text-sm font-semibold text-slate-200 hover:text-cyan-400 transition-colors flex items-center gap-1.5">
               <Sparkles className="w-4 h-4 text-cyan-400" />
-              <span>HelonixRise™ AI</span>
+              <span>HelionixRise™ AI</span>
             </a>
 
             <a href="#case-studies" className="text-sm font-semibold text-slate-200 hover:text-cyan-400 transition-colors">
@@ -301,7 +301,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
               onClick={() => setMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm text-cyan-400 font-medium hover:bg-slate-800"
             >
-              HelonixRise™ Agentic AI Platform
+              HelionixRise™ Agentic AI Platform
             </a>
             <a
               href="#case-studies"

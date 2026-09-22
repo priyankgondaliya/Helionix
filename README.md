@@ -1,4 +1,4 @@
-# Helonix Technologies - Enterprise AI, Data & Digital Engineering
+# Helionix Technologies - Enterprise AI, Data & Digital Engineering
 
 Next-Generation Enterprise IT Services and Digital Engineering platform built with **React 19**, **Vite**, **Tailwind CSS v4**, **React Hook Form**, **Joi Validation**, and **React Hot Toast**.
 
@@ -6,10 +6,10 @@ Next-Generation Enterprise IT Services and Digital Engineering platform built wi
 
 - **Enterprise Design System**: Modern dark theme `#040814` with glassmorphism, responsive grid layouts, and zero heavy animations.
 - **Dynamic Navigation Header**:
-  - Custom vector SVG emblem logo for **Helonix Technologies**.
+  - Custom vector SVG emblem logo for **Helionix Technologies**.
   - Dropdown mega-menus for **Services**, **Technologies** (with vector SVG brand icons), and **Industries**.
 - **Interactive Solutions**:
-  - **HelonixRise™ Agentic AI Platform**: Highlighted spotlight section for enterprise GenAI workflows.
+  - **HelionixRise™ Agentic AI Platform**: Highlighted spotlight section for enterprise GenAI workflows.
   - Interactive service & industry tabs with smooth scrolling and dynamic state updates.
 - **Enterprise Form Management**:
   - Built with **React Hook Form** and **Joi Validation**.

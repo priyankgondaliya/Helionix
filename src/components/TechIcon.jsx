@@ -222,5 +222,45 @@ export default function TechIcon({ name, className = "w-5 h-5" }) {
     );
   }
 
+  // 24. Flutter
+  if (n.includes('flutter')) {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none">
+        <path d="M14.3 2.5L5.7 11.1l4.3 4.3 8.6-8.6h-4.3z" fill="#02569B"/>
+        <path d="M14.3 11.1L10 15.4l4.3 4.3 4.3-4.3-4.3-4.3z" fill="#0175C2"/>
+        <path d="M14.3 19.7l4.3-4.3h-4.3l-2.1 2.2 2.1 2.1z" fill="#02569B"/>
+        <path d="M10 15.4l2.1-2.2 2.2 2.2-2.2 2.1L10 15.4z" fill="#13B9FD"/>
+      </svg>
+    );
+  }
+
+  // 25. Swift / iOS
+  if (n.includes('swift')) {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="#F05138">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.5 13.5l-4.5-4.5-4.5 4.5V7.5l4.5 4.5 4.5-4.5v8z"/>
+      </svg>
+    );
+  }
+
+  // 26. Kotlin / Android
+  if (n.includes('kotlin')) {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none">
+        <path d="M22 2H2v20l10-10L22 2z" fill="#7F52FF"/>
+      </svg>
+    );
+  }
+
+  // 27. Expo / Mobile CI
+  if (n.includes('expo') || n.includes('mobile')) {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="#00E5FF" strokeWidth="2">
+        <rect x="5" y="2" width="14" height="20" rx="3" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 18h.01" strokeWidth="3" strokeLinecap="round"/>
+      </svg>
+    );
+  }
+
   return <Cpu className={className + " text-cyan-400"} />;
 }

@@ -91,12 +91,12 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
               </svg>
             </div>
             <span className="text-lg font-black tracking-tight text-white font-sans whitespace-nowrap">
-              HELONIX <span className="text-cyan-400 font-extrabold">TECHNOLOGIES</span>
+              HELIONIX <span className="text-cyan-400 font-extrabold">TECHNOLOGIES</span>
             </span>
           </a>
 
           <p className="text-xs text-slate-400 leading-relaxed">
-            Helonix Technologies is a leading AI, data, and digital engineering company helping enterprise leaders accelerate innovation, modernize legacy platforms, and achieve digital velocity.
+            Helionix Technologies is a leading AI, data, and digital engineering company helping enterprise leaders accelerate innovation, modernize legacy platforms, and achieve digital velocity.
           </p>
         </div>
 
@@ -116,7 +116,7 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
             ))}
             <li>
               <button onClick={() => handleNavClick('platform')} className="text-cyan-400 hover:underline text-left">
-                HelonixRise™ Agentic AI
+                HelionixRise™ Agentic AI
               </button>
             </li>
           </ul>
@@ -155,7 +155,7 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
             </li>
             <li>
               <button onClick={() => handleNavClick('platform')} className="hover:text-cyan-400 transition-colors text-left">
-                HelonixRise™ AI Platform
+                HelionixRise™ AI Platform
               </button>
             </li>
             <li>
@@ -178,7 +178,7 @@ export default function Footer({ onOpenContact, onSelectService, onSelectIndustr
       <div className="border-t border-slate-900 py-6 bg-[#040814]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div>
-            © {new Date().getFullYear()} Helonix Technologies Inc. All rights reserved.
+            © {new Date().getFullYear()} Helionix Technologies Inc. All rights reserved.
           </div>
           <div className="flex items-center gap-4">
             <span>Designed for Enterprise Reliability & Client Presentation</span>

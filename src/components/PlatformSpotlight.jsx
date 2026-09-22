@@ -79,13 +79,13 @@ export default function PlatformSpotlight({ onOpenContact }) {
                   <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <span className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-                <div className="text-xs text-slate-400 font-mono">helonix-rise-orchestrator.v2.4</div>
+                <div className="text-xs text-slate-400 font-mono">helionix-rise-orchestrator.v2.4</div>
                 <div className="text-[10px] text-cyan-400 uppercase font-bold tracking-wider">Live System</div>
               </div>
 
               <img 
                 src="/assets/platform_preview.png" 
-                alt="HelonixRise Agentic AI Dashboard Preview" 
+                alt="HelionixRise Agentic AI Dashboard Preview" 
                 className="w-full h-auto object-cover transform group-hover:scale-102 transition-transform duration-500"
               />
 

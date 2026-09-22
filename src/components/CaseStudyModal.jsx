@@ -55,7 +55,7 @@ export default function CaseStudyModal({ caseStudy, onClose, onOpenContact }) {
             </div>
 
             <div className="space-y-1.5">
-              <h4 className="text-sm font-bold text-slate-200 uppercase tracking-wider">Helonix Technologies Engineering Solution</h4>
+              <h4 className="text-sm font-bold text-slate-200 uppercase tracking-wider">Helionix Technologies Engineering Solution</h4>
               <p className="text-sm text-slate-300 leading-relaxed bg-navy-900/50 p-4 rounded-xl border border-slate-800">
                 {caseStudy.solution}
               </p>

@@ -78,7 +78,7 @@ export default function ContactSection({ isOpenModal = false, onCloseModal = nul
           </div>
           <h3 className="text-2xl font-bold text-white">Consultation Request Received!</h3>
           <p className="text-slate-300 text-sm max-w-md mx-auto">
-            Thank you, <span className="text-cyan-400 font-semibold">{submittedData?.fullName || 'Partner'}</span>. An Enterprise Solutions Architect from Helonix Technologies will review your requirements and reach out within 4 business hours.
+            Thank you, <span className="text-cyan-400 font-semibold">{submittedData?.fullName || 'Partner'}</span>. An Enterprise Solutions Architect from Helionix Technologies will review your requirements and reach out within 4 business hours.
           </p>
           <button
             onClick={() => {
@@ -314,7 +314,7 @@ export default function ContactSection({ isOpenModal = false, onCloseModal = nul
                 </div>
                 <div>
                   <div className="text-xs text-slate-400 font-medium">Enterprise Inquiries</div>
-                  <div className="text-sm font-bold text-white">consulting@helonixtechnologies.com</div>
+                  <div className="text-sm font-bold text-white">consulting@helionixtechnologies.com</div>
                 </div>
               </div>
 
@@ -324,7 +324,7 @@ export default function ContactSection({ isOpenModal = false, onCloseModal = nul
                 </div>
                 <div>
                   <div className="text-xs text-slate-400 font-medium">Global Sales Line</div>
-                  <div className="text-sm font-bold text-white">+1 (800) 450-HELONIX</div>
+                  <div className="text-sm font-bold text-white">+1 (800) 450-HELIONIX</div>
                 </div>
               </div>
             </div>
