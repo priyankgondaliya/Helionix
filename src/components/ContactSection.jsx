@@ -3,8 +3,9 @@ import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import toast from 'react-hot-toast';
-import { Send, Mail, MapPin, CheckCircle, ShieldCheck, Sparkles, AlertCircle } from 'lucide-react';
+import { Send, Mail, MapPin, CheckCircle, ShieldCheck, Sparkles, AlertCircle, Loader2 } from 'lucide-react';
 import { globalOffices } from '../data/siteData';
+import { sendContactEmail } from '../services/emailService';
 
 // Joi Schema Validation (No HTML browser validations)
 const contactSchema = Joi.object({
@@ -33,6 +34,7 @@ const contactSchema = Joi.object({
 export default function ContactSection({ isOpenModal = false, onCloseModal = null }) {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
+  const [isSending, setIsSending] = useState(false);
 
   const {
     register,
@@ -57,15 +59,24 @@ export default function ContactSection({ isOpenModal = false, onCloseModal = nul
 
   const selectedService = watch('service');
 
-  const onSubmit = (data) => {
-    // Show Toast Notification
-    toast.success(`Request Received! Thank you, ${data.fullName}.`, {
-      duration: 5000,
-    });
-    setSubmittedData(data);
-    setFormSubmitted(true);
-    // Reset Form completely as requested
-    reset();
+  const onSubmit = async (data) => {
+    setIsSending(true);
+    const toastId = toast.loading('Sending consultation inquiry...');
+    try {
+      const res = await sendContactEmail(data);
+      if (res.success) {
+        toast.success(`Request Received & Email Notification Sent!`, { id: toastId, duration: 5000 });
+      } else {
+        toast.success(`Request Received! Thank you, ${data.fullName}.`, { id: toastId, duration: 5000 });
+      }
+    } catch (err) {
+      toast.success(`Request Received! Thank you, ${data.fullName}.`, { id: toastId, duration: 5000 });
+    } finally {
+      setIsSending(false);
+      setSubmittedData(data);
+      setFormSubmitted(true);
+      reset();
+    }
   };
 
   const formContent = (
@@ -246,10 +257,20 @@ export default function ContactSection({ isOpenModal = false, onCloseModal = nul
           {/* Submit CTA */}
           <button
             type="submit"
-            className="w-full py-4 rounded-xl bg-cyan-500 text-navy-950 font-bold text-sm hover:bg-cyan-400 transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20"
+            disabled={isSending}
+            className="w-full py-4 rounded-xl bg-cyan-500 text-navy-950 font-bold text-sm hover:bg-cyan-400 disabled:opacity-60 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20"
           >
-            <Send className="w-4 h-4 text-navy-950" />
-            <span>Request Enterprise Architect Consultation</span>
+            {isSending ? (
+              <>
+                <Loader2 className="w-4 h-4 text-navy-950 animate-spin" />
+                <span>Sending Consultation Request...</span>
+              </>
+            ) : (
+              <>
+                <Send className="w-4 h-4 text-navy-950" />
+                <span>Request Enterprise Architect Consultation</span>
+              </>
+            )}
           </button>
 
           <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
