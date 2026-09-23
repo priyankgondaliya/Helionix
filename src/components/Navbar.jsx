@@ -119,7 +119,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                 >
                   <div 
                     style={{ backgroundColor: '#042f2e', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
-                    className="rounded-2xl p-6 sm:p-8 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 gap-5"
+                    className="rounded-2xl p-6 sm:p-8 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 gap-5 max-h-[calc(100vh-120px)] overflow-y-auto custom-dropdown-scroll"
                   >
                     {serviceCategories.map((cat) => {
                       const ServiceIcon = serviceIcons[cat.id] || Bot;
@@ -170,7 +170,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                 >
                   <div 
                     style={{ backgroundColor: '#042f2e', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
-                    className="rounded-2xl p-6 sm:p-8 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 xl:grid-cols-3 gap-5"
+                    className="rounded-2xl p-6 sm:p-8 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 xl:grid-cols-3 gap-5 max-h-[calc(100vh-120px)] overflow-y-auto custom-dropdown-scroll"
                   >
                     {technologyStack.map((techGroup) => {
                       const CategoryHeaderIcon = techGroup.category === 'frontend' ? Code2 :
@@ -231,7 +231,7 @@ export default function Navbar({ onOpenContact, onSelectService, onSelectIndustr
                 >
                   <div 
                     style={{ backgroundColor: '#042f2e', opacity: 1, backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
-                    className="rounded-2xl p-6 sm:p-8 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 xl:grid-cols-3 gap-5"
+                    className="rounded-2xl p-6 sm:p-8 shadow-[0_35px_100px_rgba(0,0,0,1)] border border-slate-700 text-slate-100 grid grid-cols-2 xl:grid-cols-3 gap-5 max-h-[calc(100vh-120px)] overflow-y-auto custom-dropdown-scroll"
                   >
                     {industrySolutions.map((ind) => {
                       const IndustryIcon = industryIcons[ind.id] || Globe;

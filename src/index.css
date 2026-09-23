@@ -47,6 +47,21 @@
   background: var(--color-cyan-500);
 }
 
+.custom-dropdown-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-dropdown-scroll::-webkit-scrollbar-track {
+  background: #021716;
+  border-radius: 8px;
+}
+.custom-dropdown-scroll::-webkit-scrollbar-thumb {
+  background: #0f766e;
+  border-radius: 8px;
+}
+.custom-dropdown-scroll::-webkit-scrollbar-thumb:hover {
+  background: #38BDF8;
+}
+
 /* Glassmorphism utils */
 .glass-panel {
   background: color-mix(in srgb, var(--bg-muted) 75%, transparent);
