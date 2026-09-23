@@ -355,8 +355,6 @@ export const testimonials = [
 ];
 
 export const globalOffices = [
-  { city: "Santa Clara, CA", address: "4655 Old Ironsides Dr, Suite 130", country: "United States (HQ)" },
-  { city: "London", address: "30 St Mary Axe, City of London", country: "United Kingdom" },
-  { city: "Singapore", address: "1 Marina Boulevard, Level 28", country: "Singapore" },
-  { city: "Bangalore", address: "Outer Ring Road, Bellandur", country: "India Development Center" }
+  { city: "Ahmedabad", address: "20, Thaltej Shilaj Road", country: "India" },
+  { city: "Brighton", address: "91 Western Road", country: "United Kingdom" }
 ];
