@@ -82,7 +82,95 @@ function CountUpStat({ value, delay = 0 }) {
   );
 }
 
+const heroSlides = [
+  {
+    label: 'Enterprise Digital Engineering & Agentic AI',
+    lead: 'Engineering Intelligent Enterprises with',
+    accent: 'AI, Data & Cloud Platforms',
+    text: siteConfig.heroSubtitle,
+  },
+  {
+    label: 'Artificial Intelligence & Automation',
+    lead: 'Deploy Autonomous Workflows with',
+    accent: 'Agentic AI & Generative Models',
+    text: 'Turn manual operations into self-optimizing systems. Secure multi-agent AI plans, decides, and executes complex enterprise work.',
+  },
+  {
+    label: 'Cloud & Digital Engineering',
+    lead: 'Modernize Mission-Critical Systems on',
+    accent: 'Resilient Cloud Platforms',
+    text: 'Move legacy estates onto cloud-native architecture with zero-downtime delivery, built-in security, and room to scale.',
+  },
+  {
+    label: 'Data & Analytics Solutions',
+    lead: 'Unify Fragmented Data into',
+    accent: 'Real-Time Decision Intelligence',
+    text: 'Governed lakehouses and predictive models turn operational data into decisions leaders can act on with confidence.',
+  },
+  {
+    label: 'Digital Experience & UI/UX',
+    lead: 'Design Products People Actually',
+    accent: 'Adopt, Trust, and Use',
+    text: 'From customer journeys to internal tools, we craft digital experiences that raise engagement, loyalty, and productivity.',
+  },
+];
+
+const SLIDE_MS = 4000;
+
+function HeroSlide({ slide }) {
+  return (
+    <div className="space-y-8">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 backdrop-blur-md">
+        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+        <span className="text-xs font-semibold text-slate-300 uppercase tracking-widest">
+          {slide.label}
+        </span>
+      </div>
+
+      <h1 className="min-h-[8.2rem] sm:min-h-[10.2rem] lg:min-h-[13rem] flex items-center justify-center text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
+        <span>
+          {slide.lead}{' '}
+          <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300 bg-clip-text text-transparent">
+            {slide.accent}
+          </span>
+        </span>
+      </h1>
+
+      <p className="min-h-[5.25rem] sm:min-h-[6rem] text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed">
+        {slide.text}
+      </p>
+    </div>
+  );
+}
+
 export default function Hero({ onOpenContact }) {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [outgoing, setOutgoing] = useState(null);
+  const reducedMotion = useRef(false);
+  const previousIndex = useRef(0);
+  const slide = heroSlides[index];
+
+  useEffect(() => {
+    reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }, []);
+
+  useEffect(() => {
+    if (previousIndex.current === index) return undefined;
+    setOutgoing(previousIndex.current);
+    previousIndex.current = index;
+    const timer = window.setTimeout(() => setOutgoing(null), 1000);
+    return () => window.clearTimeout(timer);
+  }, [index]);
+
+  useEffect(() => {
+    if (paused || reducedMotion.current) return undefined;
+    const timer = window.setTimeout(() => {
+      setIndex((current) => (current + 1) % heroSlides.length);
+    }, SLIDE_MS);
+    return () => window.clearTimeout(timer);
+  }, [index, paused]);
+
   return (
     <section id="hero" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden bg-navy-950">
       
@@ -100,23 +188,43 @@ export default function Hero({ onOpenContact }) {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto space-y-8">
           
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-semibold text-slate-300 uppercase tracking-widest">
-              Enterprise Digital Engineering & Agentic AI
-            </span>
+          <div
+            className="space-y-8"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocus={() => setPaused(true)}
+            onBlur={() => setPaused(false)}
+          >
+            <div className="relative">
+              {outgoing !== null && outgoing !== index && (
+                <div key={`leave-${outgoing}`} className="hero-leave" aria-hidden="true">
+                  <HeroSlide slide={heroSlides[outgoing]} />
+                </div>
+              )}
+              <div key={slide.label} className="hero-enter">
+                <HeroSlide slide={slide} />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center gap-2" role="tablist" aria-label="Headline slides">
+              {heroSlides.map((item, slideIndex) => {
+                const selected = slideIndex === index;
+                return (
+                  <button
+                    key={item.label}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    aria-label={item.accent}
+                    onClick={() => setIndex(slideIndex)}
+                    className={`h-1.5 rounded-full transition-all ${
+                      selected ? 'w-8 bg-cyan-400' : 'w-2.5 bg-slate-600 hover:bg-slate-400'
+                    }`}
+                  />
+                );
+              })}
+            </div>
           </div>
-
-          {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
-            Engineering Intelligent Enterprises with <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300 bg-clip-text text-transparent">AI, Data & Cloud Platforms</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed">
-            {siteConfig.heroSubtitle}
-          </p>
 
           {/* Call to Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">

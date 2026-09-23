@@ -81,3 +81,43 @@
   border-color: color-mix(in srgb, var(--color-cyan-500) 40%, transparent);
   box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--color-cyan-500) 15%, transparent);
 }
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-28px);
+  }
+}
+
+.hero-enter {
+  animation: hero-enter 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-leave {
+  position: absolute;
+  inset: 0;
+  animation: hero-leave 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter,
+  .hero-leave {
+    animation: none;
+  }
+}
