@@ -2,7 +2,7 @@
  * Send contact form submission email via Resend API
  */
 export async function sendContactEmail(formData) {
-  const apiKey = import.meta.env.VITE_RESEND_API_KEY;
+  const apiKey = import.meta.env.RESEND_API_KEY;
 
   const emailHtml = `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #040814; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; color: #e2e8f0;">

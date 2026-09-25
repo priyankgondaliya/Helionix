@@ -4,11 +4,12 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  const apiKey = env.VITE_RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
+  const apiKey = env.RESEND_API_KEY || process.env.RESEND_API_KEY;
 
   return {
     plugins: [react()],
     server: {
+      allowedHosts: ['.trycloudflare.com'],
       proxy: {
         '/api/resend': {
           target: 'https://api.resend.com',
