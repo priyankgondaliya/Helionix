@@ -64,15 +64,12 @@ export async function sendContactEmail(formData) {
   };
 
   const isDev = import.meta.env.DEV;
-  const endpoint = isDev ? '/api/resend/emails' : 'https://api.resend.com/emails';
+  // In dev, use Vite proxy. In production, use Vercel Serverless Function.
+  const endpoint = isDev ? '/api/resend/emails' : '/api/resend';
 
   const headers = {
     'Content-Type': 'application/json',
   };
-
-  if (!isDev && apiKey) {
-    headers['Authorization'] = `Bearer ${apiKey}`;
-  }
 
   try {
     const response = await fetch(endpoint, {
